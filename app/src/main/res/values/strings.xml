@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">4genda</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="todos">Todos os contatos</string>
+
+    <string name="queryHint">Procurar contato</string>
+    <string name="novo_contato">Novo contato</string>
 </resources>
