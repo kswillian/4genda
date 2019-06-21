@@ -1,10 +1,14 @@
-package com.example.nelso.a4genda;
+package com.example.nelso.a4genda.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
+
+import com.example.nelso.a4genda.R;
 
 import androidx.appcompat.app.AppCompatActivity;
+import io.realm.Realm;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -18,6 +22,11 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }, 3000);
+
+            Realm.init(this);
+
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
 }

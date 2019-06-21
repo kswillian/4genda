@@ -5,4 +5,16 @@
 
     <string name="queryHint">Procurar contato</string>
     <string name="novo_contato">Novo contato</string>
+    <string name="salvar">Salvar</string>
+    <string name="sem_contatos">Você não tem contatos nessa lista :(</string>
+    <string name="apagar_contato_mensagem">As informações sobre este contato serão perdidas. Tem certeza que deseja apagá-lo? </string>
+    <string name="apagar_contato">Apagar contato</string>
+    <string name="confirmacao">Sim</string>
+    <string name="negacao">Não</string>
+
+    <string name="nome_contato">Nome</string>
+    <string name="telefone_contato">Telefone</string>
+    <string name="celular_contato">Celular</string>
+    <string name="aniversario_contato">Aniversário</string>
+    <string name="filiacao_contato">Filiação</string>
 </resources>
