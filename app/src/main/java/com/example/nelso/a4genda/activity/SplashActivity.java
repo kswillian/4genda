@@ -23,8 +23,6 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }, 3000);
 
-            Realm.init(this);
-
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }

@@ -2,7 +2,11 @@ package com.example.nelso.a4genda.DAO;
 
 import com.example.nelso.a4genda.model.Contato;
 
+import java.util.List;
+
 import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 public class ContatoDAO {
 
@@ -36,8 +40,21 @@ public class ContatoDAO {
 
     }
 
-    public void queryContato(long experimentId){
-
+    public void queryContato(IContatoDAO callback){
+        realm = Realm.getDefaultInstance();
+        try {
+            realm.beginTransaction();
+            RealmQuery<Contato> query = realm.where(Contato.class);
+            RealmResults<Contato> results = query.findAll();
+            List<Contato> contatos = realm.copyFromRealm(results);
+            callback.onSuccessList(contatos);
+            realm.commitTransaction();
+        } catch (Exception exception){
+            exception.printStackTrace();
+            callback.onError(exception.getMessage());
+        }finally {
+            realm.close();
+        }
     }
 
     public void queryContatoById(long contatoId){

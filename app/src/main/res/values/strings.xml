@@ -1,16 +1,20 @@
 <resources>
     <string name="app_name">4genda</string>
     <string name="favoritos">Favoritos</string>
-    <string name="todos">Todos os contatos</string>
+    <string name="contatos">Meus contatos</string>
 
     <string name="queryHint">Procurar contato</string>
     <string name="novo_contato">Novo contato</string>
     <string name="salvar">Salvar</string>
-    <string name="sem_contatos">Você não tem contatos nessa lista :(</string>
+    <string name="editar">Editar</string>
+    <string name="sem_contatos">Você não tem contatos em sua lista :(</string>
     <string name="apagar_contato_mensagem">As informações sobre este contato serão perdidas. Tem certeza que deseja apagá-lo? </string>
     <string name="apagar_contato">Apagar contato</string>
     <string name="confirmacao">Sim</string>
     <string name="negacao">Não</string>
+    <string name="aviso">Campo obrigatório</string>
+    <string name="carregando">Carregando&#8230;</string>
+    <string name="contato_excluido">Contato excluído</string>
 
     <string name="nome_contato">Nome</string>
     <string name="telefone_contato">Telefone</string>

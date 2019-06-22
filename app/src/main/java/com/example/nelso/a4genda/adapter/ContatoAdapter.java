@@ -1,5 +1,6 @@
 package com.example.nelso.a4genda.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.nelso.a4genda.DAO.ContatoDAO;
 import com.example.nelso.a4genda.R;
+import com.example.nelso.a4genda.activity.ContatoActivity;
 import com.example.nelso.a4genda.activity.MainActivity;
 import com.example.nelso.a4genda.model.Contato;
 
@@ -17,14 +19,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TodosAdapter extends RecyclerView.Adapter<TodosAdapter.ContatoViewHolder> {
+public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoViewHolder> {
 
     private List<Contato> contatosList;
     private View v;
     private ContatoDAO dao;
     private MainActivity activity;
 
-    public TodosAdapter(ContatoDAO dao, List<Contato> contatosList, MainActivity activity){
+    public ContatoAdapter(ContatoDAO dao, List<Contato> contatosList, MainActivity activity){
         this.dao = dao;
         this.contatosList = contatosList;
         this.activity = activity;
@@ -53,6 +55,15 @@ public class TodosAdapter extends RecyclerView.Adapter<TodosAdapter.ContatoViewH
                     .setNegativeButton(R.string.negacao, null)
                     .show();
             return true;
+        });
+
+        holder.llContato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ContatoActivity.class);
+                intent.putExtra("id", contato.getId());
+                activity.startActivity(intent);
+            }
         });
     }
 
