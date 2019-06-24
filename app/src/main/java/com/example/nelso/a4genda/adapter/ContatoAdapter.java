@@ -12,6 +12,7 @@ import com.example.nelso.a4genda.R;
 import com.example.nelso.a4genda.activity.ContatoActivity;
 import com.example.nelso.a4genda.activity.MainActivity;
 import com.example.nelso.a4genda.model.Contato;
+import com.orhanobut.hawk.Hawk;
 
 import java.util.List;
 
@@ -47,12 +48,15 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoV
         holder.tvContato.setText(contato.getNome());
 
         holder.llContato.setOnLongClickListener(v -> {
+            holder.llContato.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimaryDark));
             new AlertDialog.Builder(activity)
                     .setTitle(R.string.apagar_contato)
                     .setMessage(R.string.apagar_contato_mensagem).setPositiveButton(R.string.confirmacao, (dialog, which) -> {
-                dao.removeContato(contato.getId());
+                dao.removeContato(contato.getId(), activity);
             })
-                    .setNegativeButton(R.string.negacao, null)
+                    .setNegativeButton(R.string.negacao, (dialog, which) -> {
+                        holder.llContato.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
+                    })
                     .show();
             return true;
         });
@@ -60,6 +64,7 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoV
         holder.llContato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Hawk.put("contato", contato);
                 Intent intent = new Intent(activity, ContatoActivity.class);
                 intent.putExtra("id", contato.getId());
                 activity.startActivity(intent);
@@ -69,7 +74,7 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoV
 
     @Override
     public int getItemCount() {
-        return 0;
+        return contatosList.size();
     }
 
     static class ContatoViewHolder extends RecyclerView.ViewHolder{

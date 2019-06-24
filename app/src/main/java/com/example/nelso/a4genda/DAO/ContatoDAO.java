@@ -31,13 +31,28 @@ public class ContatoDAO {
                 pk = maxValue + 1;
             }
             contato.setId(pk);
-            realm.insert(contato);
+            realm.copyToRealm(contato);
             realm.commitTransaction();
             realm.close();
     }
 
-    public void updateContato(Contato contato){
+    public void updateContato(Contato contato, IContatoDAO callback){
+        realm = Realm.getDefaultInstance();
+        try {
+            realm.beginTransaction();
+            Contato contatoAlterado = realm.copyToRealmOrUpdate(contato);
+            realm.commitTransaction();
 
+            if(contatoAlterado != null)
+                callback.onSuccessUpdate();
+            else
+                callback.onError("Houve um erro ao tentar atualizar o registro.");
+        }catch (Exception ex){
+            ex.printStackTrace();
+            callback.onError(ex.getMessage());
+        }finally {
+            realm.close();
+        }
     }
 
     public void queryContato(IContatoDAO callback){
@@ -61,7 +76,29 @@ public class ContatoDAO {
 
     }
 
-    public void removeContato(long evaluationId) {
+    public void removeContato(long contatoId, IContatoDAO callback) {
+        realm = Realm.getDefaultInstance();
+        try {
+            realm.beginTransaction();
+
+            Contato contatoDeletar = realm.where(Contato.class).equalTo("id", contatoId).findFirst();
+            if(contatoDeletar != null)
+                contatoDeletar.deleteFromRealm();
+
+            realm.commitTransaction();
+
+            if(contatoDeletar != null)
+                callback.onSuccessRemove();
+            else
+                callback.onError("Erro ao tentar excluir");
+
+        } catch (Exception ex){
+            ex.printStackTrace();
+            callback.onError(ex.getMessage());
+        }finally {
+            realm.close();
+        }
+
 
     }
 

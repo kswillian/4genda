@@ -14,6 +14,7 @@ import com.example.nelso.a4genda.R;
 import com.example.nelso.a4genda.adapter.ContatoAdapter;
 import com.example.nelso.a4genda.model.Contato;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.orhanobut.hawk.Hawk;
 
 import java.util.List;
 
@@ -23,31 +24,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity implements IContatoDAO {
 
-    private FloatingActionButton fab;
     private List<Contato> contatoList;
     private ContatoDAO dao;
     protected ProgressDialog progressDialog;
     private TextView semContato;
     private RecyclerView rvContatos;
-    private RecyclerView.OnItemTouchListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Hawk.init(this).build();
+
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         showLoading();
-        fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         dao = new ContatoDAO();
-        dao.queryContato(MainActivity.this);
         rvContatos = findViewById(R.id.rv_todos);
         semContato = findViewById(R.id.tv_sem_contatos);
 
+        dao.queryContato(MainActivity.this);
+
         fab.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, NewContactActivity.class);
-//                MainActivity.this.finish();
+            Intent intent = new Intent(MainActivity.this, NovoContatoActivity.class);
             startActivity(intent);
         });
     }
@@ -73,17 +74,18 @@ public class MainActivity extends AppCompatActivity implements IContatoDAO {
         hideLoading();
 
         contatoList = lista;
-        ContatoAdapter contatoAdapter = new ContatoAdapter(dao, contatoList, this);
-        rvContatos.setLayoutManager(new LinearLayoutManager(this));
-        rvContatos.setAdapter(contatoAdapter);
 
         if(contatoList != null && contatoList.size() > 0){
-            semContato.setVisibility(View.GONE);
             rvContatos.setVisibility(View.VISIBLE);
+            semContato.setVisibility(View.GONE);
         }else{
             rvContatos.setVisibility(View.GONE);
             semContato.setVisibility(View.VISIBLE);
         }
+
+        ContatoAdapter contatoAdapter = new ContatoAdapter(dao, contatoList, this);
+        rvContatos.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        rvContatos.setAdapter(contatoAdapter);
     }
 
     @Override
