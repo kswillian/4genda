@@ -76,6 +76,21 @@ public class ContatoDAO {
 
     }
 
+    public void queryContatoByName(String query, IContatoDAO callback2){
+        realm = Realm.getDefaultInstance();
+        try {
+            realm.beginTransaction();
+            RealmResults<Contato> resultados = realm.where(Contato.class).contains("nome", query).findAll();
+            callback2.onSuccessList(resultados);
+            realm.commitTransaction();
+        } catch (Exception exception){
+            exception.printStackTrace();
+            callback2.onError(exception.getMessage());
+        }finally {
+            realm.close();
+        }
+    }
+
     public void removeContato(long contatoId, IContatoDAO callback) {
         realm = Realm.getDefaultInstance();
         try {

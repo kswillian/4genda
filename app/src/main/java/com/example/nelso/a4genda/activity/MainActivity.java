@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements IContatoDAO {
     protected ProgressDialog progressDialog;
     private TextView semContato;
     private RecyclerView rvContatos;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,29 @@ public class MainActivity extends AppCompatActivity implements IContatoDAO {
         dao = new ContatoDAO();
         rvContatos = findViewById(R.id.rv_todos);
         semContato = findViewById(R.id.tv_sem_contatos);
+        searchView = findViewById(R.id.searchview);
 
         dao.queryContato(MainActivity.this);
 
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, NovoContatoActivity.class);
             startActivity(intent);
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                dao.queryContatoByName(query);
+//                if(contatoList.contains()){
+//
+//                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
         });
     }
 

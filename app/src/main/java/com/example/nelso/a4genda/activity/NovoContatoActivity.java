@@ -66,10 +66,10 @@ public class NovoContatoActivity extends AppCompatActivity {
 
     public void novoContato(){
         Contato contato = new Contato();
-        contato.setNome(nome.getText().toString());
-        contato.setTelefone(Long.parseLong(telefone.getText().toString()));
-        contato.setCelular(Long.parseLong(celular.getText().toString()));
-        contato.setAniversario(Long.parseLong(aniversario.getText().toString()));
+        contato.setNome(MaskWatcher.unmask(nome.getText().toString()));
+        contato.setTelefone(Long.parseLong(MaskWatcher.unmask(telefone.getText().toString())));
+        contato.setCelular(Long.parseLong(MaskWatcher.unmask(celular.getText().toString())));
+        contato.setAniversario(Long.parseLong(MaskWatcher.unmask(aniversario.getText().toString())));
         contato.setFiliacao(filiacao.getText().toString());
 
         dao.salvarContato(contato);
