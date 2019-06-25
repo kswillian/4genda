@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements IContatoDAO {
         dao = new ContatoDAO();
         rvContatos = findViewById(R.id.rv_todos);
         semContato = findViewById(R.id.tv_sem_contatos);
-        searchView = findViewById(R.id.searchview);
+//      searchView = findViewById(R.id.searchview);
 
         dao.queryContato(MainActivity.this);
 
@@ -55,21 +55,21 @@ public class MainActivity extends AppCompatActivity implements IContatoDAO {
             startActivity(intent);
         });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
 //                dao.queryContatoByName(query);
 //                if(contatoList.contains()){
 //
 //                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
     }
 
     public void showLoading(){

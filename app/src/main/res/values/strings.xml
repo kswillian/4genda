@@ -5,6 +5,7 @@
 
     <string name="queryHint">Procurar contato</string>
     <string name="novo_contato">Novo contato</string>
+    <string name="editar_contato">Editar contato</string>
     <string name="salvar">Salvar</string>
     <string name="editar">Editar</string>
     <string name="sem_contatos">Você não tem contatos em sua lista :(</string>

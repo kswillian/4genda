@@ -1,9 +1,11 @@
 package com.example.nelso.a4genda.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Contato extends RealmObject {
 
+    @PrimaryKey
     private long id;
     private String nome;
     private long telefone;

@@ -36,23 +36,12 @@ public class ContatoDAO {
             realm.close();
     }
 
-    public void updateContato(Contato contato, IContatoDAO callback){
+    public void updateContato(Contato contato){
         realm = Realm.getDefaultInstance();
-        try {
             realm.beginTransaction();
-            Contato contatoAlterado = realm.copyToRealmOrUpdate(contato);
+            realm.copyToRealmOrUpdate(contato);
             realm.commitTransaction();
-
-            if(contatoAlterado != null)
-                callback.onSuccessUpdate();
-            else
-                callback.onError("Houve um erro ao tentar atualizar o registro.");
-        }catch (Exception ex){
-            ex.printStackTrace();
-            callback.onError(ex.getMessage());
-        }finally {
             realm.close();
-        }
     }
 
     public void queryContato(IContatoDAO callback){

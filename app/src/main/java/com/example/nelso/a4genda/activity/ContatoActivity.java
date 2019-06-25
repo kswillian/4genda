@@ -1,5 +1,6 @@
 package com.example.nelso.a4genda.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -42,7 +43,9 @@ public class ContatoActivity extends AppCompatActivity {
         filiacaoContato.setText(String.format(Locale.getDefault(), "Filiação: %s", contato.getFiliacao()));
 
         editarButton.setOnClickListener(v -> {
-            //do nothing
+            Hawk.put("contato", contato);
+            Intent intent = new Intent(ContatoActivity.this, EditarContatoActivity.class);
+            startActivity(intent);
         });
 
         Hawk.delete("contato");

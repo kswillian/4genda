@@ -54,8 +54,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
         android:text="@string/sem_contatos"
         android:layout_below="@id/tv_todos"
+        android:layout_centerHorizontal="true"
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
